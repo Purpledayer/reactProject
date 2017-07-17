@@ -1,5 +1,5 @@
 ## 插件&插件说明
-###上线依赖插件说明
+### 上线依赖插件说明
 react                                   //react.js
 react-router                            //react.js路由
 react-dom                               //react.js dom操作                               
@@ -8,7 +8,7 @@ webpack                                 //webpack插件
 html-webpack-plugin                     //用来简化创建服务于 webpack bundle 的 HTML 文件
 open-browser-webpack-plugin             //启动后自动打开浏览器插件
 extract-text-webpack-plugin             //抽离css 防止打不错乱
-###开发依赖插件说明
+### 开发依赖插件说明
 webpack-dev-server                      //webpack服务插件
 babel-loader                            //webpack-loader基础插件
 css-loader                              //css编译插件
