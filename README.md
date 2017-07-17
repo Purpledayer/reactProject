@@ -1,7 +1,7 @@
 ## 插件&插件说明
 ### 上线依赖插件说明
-react                                   //react.js
-react-router                            //react.js路由
+react																		//react.js <br />	
+react-router                            //react.js路由 <br/>
 react-dom                               //react.js dom操作                               
 antd                                    //蚂蚁金服ant design 插件
 webpack                                 //webpack插件
@@ -20,7 +20,9 @@ webpack-hot-middleware                  //自动刷新
 babel-plugin-webpack-alias              //功能未知
 ### 插件安装
 #### 上线之后一直依赖
+```
 cnpm install react react-router react-dom antd webpack html-webpack-plugin open-browser-webpack-plugin extract-text-webpack-plugin --save
+```
 #### 开发依赖
 cnpm install webpack-dev-server babel babel-cli babel-core babel-loader css-loader less-loader style-loader url-loader react-hot-loader webpack-hot-middleware --save-dev
 npm i webpack-dev-server babel-loader css-loader less-loader style-loader react-hot-loader webpack-hot-middleware --save-dev    
