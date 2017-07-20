@@ -1,6 +1,4 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-ReactDOM.render(
-	<h1>Hello, world!</h1>,
-	document.getElementById('root')
-);
+import router from './router';
+ReactDOM.render(router,document.getElementById('root'));
