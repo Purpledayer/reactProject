@@ -18,35 +18,39 @@ module.exports = {
 		chunkFilename: '[name].js'
 	},
 	resolve: {
-		extensions: ['.js', '.json'],
+		extensions: ['.jsx','.js', '.json','.less'],
 		alias: {
 		  	components: __dirname + '/app/components',
-		  	actions: __dirname + '/app/actions',
-		  	api: __dirname + '/app/api',
-		  	reducers: __dirname + '/app/reducers',
-		  	utils: __dirname + '/app/utils',
-		  	constants: __dirname + '/app/constants',
-		  	controllers: __dirname + '/app/controllers',
-		  	style: __dirname + '/app/style',
+		  	pages: __dirname + '/app/pages',
 		},
 	},
 	//webpack-loader配置
 	module: {
-		loaders: [{
-		    test: /\.js[x]?$/,
-		    exclude: /node_modules/,
-		    loader: 'react-hot-loader!babel-loader',
-		},{
-		    test: /\.less$/,
-		    loader: 'style!css!postcss!less',
-		},{
-		    test: /\.css/,
-		    loader: 'style!css',
-		},{
-		    test: /\.(png|jpg)$/,
-		    loader: 'url-loader?limit=8192',
-		}],
-	},
+	    loaders: [{
+	        test: /\.js[x]?$/,
+	        exclude: /node_modules/,
+	        loader: 'react-hot-loader!babel-loader',
+	      },{
+	        test: /\.less$/,
+	        loader: 'style-loader!css-loader!less-loader',
+	      },{
+            test: /\.css$/,
+            use: ['style-loader',
+                {loader: 'css-loader',options: {importLoaders: 1}},
+                {loader: 'postcss-loader',
+                options: {plugins: (loader) => [
+                    require('postcss-import')({root: loader.resourcePath}),
+                    require('autoprefixer')(), //CSS浏览器兼容
+                    require('cssnano')()  //压缩css
+                    ]}
+                }
+            ]
+        },{
+	        test: /\.(png|jpg)$/,
+	        loader: 'url-loader?limit=8192',
+	      }],
+	  	},
+	 
 	//外部插件设置
 	plugins: [
 		new webpack.DefinePlugin({"process.env": {NODE_ENV: JSON.stringify("production")}}),

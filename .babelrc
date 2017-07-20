@@ -4,7 +4,7 @@
 	    "espower", 
 	    "transform-runtime", 
 	    "transform-decorators-legacy", 
-	    ["antd", [{ "libraryName": "antd" }]], 
+	    ["antd", [{ "libraryName": "antd", "style": true }]], 
 	    ["webpack-alias", {"config": "${process.cwd()}/webpack-test.config.js"}]],
     "env": {
         
