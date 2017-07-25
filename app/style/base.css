@@ -1,0 +1,81 @@
+@charset 'utf-8';
+/*
+ reset antd
+*/
+.FullScreen {
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+}
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+.paddingRight {
+  padding-right: 0.95rem !important;
+}
+.colorWhite a {
+  color: #fff;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.logo {
+  height: 32px;
+  background: #333;
+  border-radius: 6px;
+  margin: 16px;
+}
+#root,
+#react-box {
+  height: 100%;
+}
+body {
+  background: #fff;
+}
+.MyHeader {
+  height: 3.15rem;
+  padding-right: 0.95rem !important;
+  box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, 0.05);
+}
+.MyHeader .operating {
+  float: right;
+  height: inherit;
+  line-height: 4;
+}
+.Login-box {
+  background: url('../images/bg.png') no-repeat;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-size: 100% 100%;
+}
+.login-from {
+  width: 18rem;
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  border-radius: 5px;
+  position: fixed;
+  height: 18rem;
+  margin-top: -10rem;
+  top: 50%;
+  right: 8rem;
+  background: #fff;
+}
+.login-from div span input {
+  background: #fff !important;
+}
+.login-from .login-form-button {
+  width: 100%;
+}
+.login-from .login-form-forgot {
+  float: right;
+}

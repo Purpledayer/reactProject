@@ -37,3 +37,10 @@ babel-plugin-webpack-alias
 babel-preset-es2015
 babel-preset-stage-0
 babel-preset-react
+
+
+npm i redux react-redux redux-thunk react-router-redux   --save
+
+cnpm i react-router-dom --save
+cnpm i url-loader --save-dev
+cnpm i file-loader --save-dev
