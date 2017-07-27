@@ -50,3 +50,4 @@ npm i redux react-redux redux-thunk react-router-redux   --save
 cnpm i react-router-dom --save
 cnpm i url-loader --save-dev
 cnpm i file-loader --save-dev
+cnpm install victory --save 可视化图表

@@ -2,6 +2,14 @@
 /*
  reset antd
 */
+.position-fixed {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background: #fff;
+}
 .FullScreen {
   left: 0px;
   right: 0px;
@@ -26,6 +34,103 @@ a {
 a:hover {
   text-decoration: none;
 }
+.ant-layout-header {
+  line-height: normal;
+}
+.pad-spacing {
+  padding: 0.35rem;
+}
+.pad-spacing-top {
+  padding-top: 0.35rem;
+}
+.pad-spacing-right {
+  padding-right: 0.35rem;
+}
+.pad-spacing-bottom {
+  padding-bottom: 0.35rem;
+}
+.pad-spacing-left {
+  padding-left: 0.35rem;
+}
+.mar-spacing {
+  margin: 0.35rem;
+}
+.mar-spacing-top {
+  margin-top: 0.35rem;
+}
+.mar-spacing-right {
+  margin-right: 0.35rem;
+}
+.mar-spacing-bottom {
+  margin-bottom: 0.35rem;
+}
+.mar-spacing-left {
+  margin-left: 0.35rem;
+}
+.border-color {
+  border-color: #e7e7e7;
+}
+.border {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e7e7e7;
+}
+.border-top {
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-color: #e7e7e7;
+}
+.border-right {
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-color: #e7e7e7;
+}
+.border-bottom {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: #e7e7e7;
+}
+.border-left {
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-color: #e7e7e7;
+}
+.borderRadius {
+  border-radius: 4px;
+}
+.borderRadius-top-left {
+  border-top-left-radius: 4px;
+}
+.borderRadius-top-right {
+  border-top-right-radius: 4px;
+}
+.borderRadius-bottom-left {
+  border-bottom-left-radius: 4px;
+}
+.borderRadius-bottom-right {
+  border-bottom-right-radius: 4px;
+}
+.halfwidth {
+  width: 49.75%;
+}
+.display-line {
+  display: inline-block;
+}
+.vertical-align {
+  vertical-align: top;
+}
+.clearfix {
+  /*兼容 IE*/
+  zoom: 1;
+}
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.textAlign-right {
+  text-align: right;
+}
 .logo {
   height: 32px;
   background: #333;
@@ -44,10 +149,27 @@ body {
   padding-right: 0.95rem !important;
   box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, 0.05);
 }
+.MyHeader .ant-dropdown-link {
+  display: block;
+  color: #fff;
+  line-height: 2.8rem;
+}
+.MyHeader .ant-dropdown-link .ant-avatar {
+  vertical-align: middle;
+  margin-right: 0.35rem;
+}
+.MyHeader .ant-dropdown-link .anticon-setting {
+  margin-right: 0.35rem;
+}
+.MyHeader ul {
+  float: right;
+}
+.MyHeader ul li {
+  display: inline-block;
+  margin-right: 1rem;
+}
 .MyHeader .operating {
   float: right;
-  height: inherit;
-  line-height: 4;
 }
 .Login-box {
   background: url('../images/bg.png') no-repeat;
@@ -78,4 +200,182 @@ body {
 }
 .login-from .login-form-forgot {
   float: right;
+}
+.content-box {
+  background: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e7e7e7;
+  border-radius: 4px;
+}
+.content-box .ant-table-body {
+  height: 27.6rem;
+}
+.content-box .footer {
+  padding: 0.6rem 0 0.6rem 0.6rem;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-color: #e7e7e7;
+}
+.content-box .footer .ant-pagination {
+  text-align: center;
+}
+.content-box .footer .ant-pagination-total-text {
+  float: right;
+}
+.content-box .footer .operating {
+  float: left;
+}
+.content-box .footer .operating > a {
+  line-height: 3;
+  color: #4a4a4a;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 3px;
+  margin-right: 0.35rem;
+}
+.content-box .footer .operating > a i {
+  width: 1rem;
+}
+.content-box .title {
+  background: #f7f7f7;
+  padding: 0.6rem 0 0.6rem 0.6rem;
+  font-size: 14px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: #e7e7e7;
+}
+.welcome-table {
+  line-height: 1.5;
+}
+.PieChart {
+  width: 80%;
+  height: 4rem;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.contont-box {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  left: 200px;
+  top: 3.15rem;
+}
+.welcome-title-header {
+  font-weight: 500;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: #e7e7e7;
+  padding-left: 0.35rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+}
+.welcome-title-header h5 {
+  line-height: 28px;
+  font-size: 14px;
+}
+.welcome-title-header h5,
+.welcome-title-header .ant-select {
+  display: inline-block;
+}
+.welcome-title-header .ant-select {
+  float: right;
+  padding-right: 0.35rem;
+}
+.statistics .statistics-First .ant-col-8,
+.statistics .statistics-Second .ant-col-8,
+.statistics .statistics-Third .ant-col-8 {
+  padding-right: 0px !important;
+}
+.statistics .statistics-First .ant-col-8:last-child,
+.statistics .statistics-Second .ant-col-8:last-child,
+.statistics .statistics-Third .ant-col-8:last-child {
+  padding-right: 8px !important;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered,
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered,
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered {
+  height: 5.05rem !important;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered .ant-card-body,
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered .ant-card-body,
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered .ant-card-body {
+  padding: 0.6rem;
+  /*兼容 IE*/
+  zoom: 1;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered .ant-card-body:after,
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered .ant-card-body:after,
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered .ant-card-body:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered .ant-card-body > div,
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered .ant-card-body > div,
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered .ant-card-body > div {
+  display: inline-block;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered .ant-card-body > div:first-child,
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered .ant-card-body > div:first-child,
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered .ant-card-body > div:first-child {
+  line-height: 4rem;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered .ant-card-body > div:last-child,
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered .ant-card-body > div:last-child,
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered .ant-card-body > div:last-child {
+  float: right;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered .ant-card-body > div > i,
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered .ant-card-body > div > i,
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered .ant-card-body > div > i {
+  font-size: 1.6rem;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered .ant-card-body > div > ul,
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered .ant-card-body > div > ul,
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered .ant-card-body > div > ul {
+  line-height: 1.5rem;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered {
+  border-left: 5px solid #7ed321;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered .ant-card-body > div:last-child {
+  text-align: right;
+}
+.statistics .statistics-First .ant-col-8 .ant-card-bordered .ant-card-body > div > i,
+.statistics .statistics-First .ant-col-8 .ant-card-bordered .ant-card-body > div ul > li:first-child {
+  color: #7ed321;
+}
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered {
+  border-left: 5px solid #4183f8;
+}
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered .ant-card-body > div:last-child {
+  text-align: right;
+}
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered .ant-card-body > div > i,
+.statistics .statistics-Second .ant-col-8 .ant-card-bordered .ant-card-body > div ul > li:first-child {
+  color: #4183f8;
+}
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered {
+  border: 1px solid #f6a623;
+}
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered .ant-card-body > div:last-child {
+  text-align: right;
+}
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered .ant-card-body > div > i,
+.statistics .statistics-Third .ant-col-8 .ant-card-bordered .ant-card-body > div ul > li {
+  color: #f6a623;
+}
+.custom-filter-dropdown {
+  padding: 8px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+}
+.custom-filter-dropdown input {
+  width: 130px;
+  margin-right: 8px;
+}
+.highlight {
+  color: #f50;
 }

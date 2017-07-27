@@ -1,3 +1,10 @@
+/*
+ * @Author(作者) : Avalon 
+ * @Create Time(创建时间): 2017-7-24
+ * @Last Modified by(最后修改者): Avalon 
+ * @Last Modified time(最后修改事件): 2017-7-25
+ */
+
 import React,{Component} from "react";
 import ReactDOM from 'react-dom';
 import { hashHistory } from 'react-router-dom';
@@ -10,7 +17,7 @@ class NormalLoginForm extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        sessionStorage.setItem('token', 'dupi')
+        sessionStorage.setItem('token', 'token')
         /*react-router v4.0.x 新的链接方式 */
         this.props.history.push('/')
       }

@@ -1,6 +1,14 @@
 /*
  reset antd
 */
+.position-fixed {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background: #fff;
+}
 .FullScreen {
   left: 0px;
   right: 0px;
@@ -24,4 +32,101 @@ a {
 }
 a:hover {
   text-decoration: none;
+}
+.ant-layout-header {
+  line-height: normal;
+}
+.pad-spacing {
+  padding: 0.35rem;
+}
+.pad-spacing-top {
+  padding-top: 0.35rem;
+}
+.pad-spacing-right {
+  padding-right: 0.35rem;
+}
+.pad-spacing-bottom {
+  padding-bottom: 0.35rem;
+}
+.pad-spacing-left {
+  padding-left: 0.35rem;
+}
+.mar-spacing {
+  margin: 0.35rem;
+}
+.mar-spacing-top {
+  margin-top: 0.35rem;
+}
+.mar-spacing-right {
+  margin-right: 0.35rem;
+}
+.mar-spacing-bottom {
+  margin-bottom: 0.35rem;
+}
+.mar-spacing-left {
+  margin-left: 0.35rem;
+}
+.border-color {
+  border-color: #e7e7e7;
+}
+.border {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e7e7e7;
+}
+.border-top {
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-color: #e7e7e7;
+}
+.border-right {
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-color: #e7e7e7;
+}
+.border-bottom {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: #e7e7e7;
+}
+.border-left {
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-color: #e7e7e7;
+}
+.borderRadius {
+  border-radius: 4px;
+}
+.borderRadius-top-left {
+  border-top-left-radius: 4px;
+}
+.borderRadius-top-right {
+  border-top-right-radius: 4px;
+}
+.borderRadius-bottom-left {
+  border-bottom-left-radius: 4px;
+}
+.borderRadius-bottom-right {
+  border-bottom-right-radius: 4px;
+}
+.halfwidth {
+  width: 49.75%;
+}
+.display-line {
+  display: inline-block;
+}
+.vertical-align {
+  vertical-align: top;
+}
+.clearfix {
+  /*兼容 IE*/
+  zoom: 1;
+}
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.textAlign-right {
+  text-align: right;
 }

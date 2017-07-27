@@ -16,15 +16,15 @@ export default class Containers extends Component {
     render() {
         const {children } = this.props
         return (
-        <Layout id="react-box">
+        <Layout id="react-box" className="position-fixed">
             <Sider collapsible collapsed={this.state.collapsed}  onCollapse={this.onCollapse}>
                 <LeftNav/>
             </Sider>
             <Layout>
-                 <Header className= "MyHeader" style={{ background: '#fff', padding: 0 }} >
+                 <Header className= "MyHeader" style={{ padding: 0 }} >
                     <MyHeader/>
                  </Header>
-                <Content style={{ margin: '0 16px' }}>
+                <Content className="mar-spacing contont-box">
                     {children}
                 </Content>
             </Layout>
