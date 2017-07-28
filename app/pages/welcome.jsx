@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import { Menu,Table, Pagination ,Icon ,Card, Col, Row , Select} from 'antd';
 
-import { PieChart, Pie, Legend} from 'recharts';
+import ReactHighcharts from 'react-highcharts';
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -149,9 +149,8 @@ export default class welcome extends Component {
 							<Option value="week">本周</Option>
 						</Select>
 					</div>
-					<PieChart width={300} height={300}>
-						<Pie  data={data1} cx={200} cy={200} outerRadius={80} fill="#8884d8" label/>
-					</PieChart>
+					<div className="highchart-box"><ReactHighcharts config={config} ref="chart" /></div>
+					
 				</div>
 			</div>
 		</div>
@@ -192,3 +191,41 @@ const sectors = [
 function handleChange(value) {
   console.log(`selected ${value}`);
 }
+const config={	
+	chart: {//绘图区样式设置
+		height:266,
+	},
+	title:{text:null,floating:true,},
+	credits: {enabled: false},
+	plotOptions: {
+		pie: {
+			allowPointSelect: true,
+			cursor: true,
+			showInLegend: true,
+			dataLabels: {
+				enabled: false
+			}
+		},
+		series: {//饼状图位置
+			animation: true,
+			center: [250, 100],
+			size:230,
+		}
+	},
+	legend: {//图例设置
+			floating: true,
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'top',
+			// y: 54
+		},
+	series: [{//数据类型设置
+		type: 'pie',
+		name: 'SLICE',
+		data: [
+			['Safari',    8.5],
+			['Opera',     6.2],
+			['Others',   0.7]
+		]
+	}]
+};
