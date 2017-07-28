@@ -8,15 +8,15 @@ export default class LeftNav extends Component {
     return (
         <div>
             <div className="logo" />
-            <Menu className="colorWhite" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} mode="inline" theme="dark" >
+            <Menu className="colorWhite" defaultOpenKeys={['sub1']} mode="inline" theme="dark" >
                 <Menu.Item key="1">
-                    <Icon type="pie-chart" /><span><Link to="/houseManage">第一导航</Link></span>
+                    <Link to="/company"><Icon type="pie-chart" /><span>公司管理</span></Link>
                 </Menu.Item>
                 <Menu.Item key="2">
-                    <Icon type="desktop" /><span><Link to="/test">test导航</Link></span>
+                    <Link to="/test"><Icon type="desktop" /><span>test导航</span></Link>
                 </Menu.Item>
                 <Menu.Item key="3">
-                    <Icon type="inbox" /><span>Option 3</span>
+                    <Icon type="inbox" /><span>角色管理</span>
                 </Menu.Item>
             </Menu>
         </div>
