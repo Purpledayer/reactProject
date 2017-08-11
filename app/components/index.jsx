@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import MyHeader from './header';
 import LeftNav from './leftNav';
+import TabList from './tabs/tabList'
 import 'antd/dist/antd.less';
 import './../style/base.less';
 const { Header, Content, Sider } = Layout;
@@ -25,6 +26,7 @@ export default class Containers extends Component {
                     <MyHeader/>
                  </Header>
                 <Content className="mar-spacing contont-box">
+                    <TabList></TabList>
                     {children}
                 </Content>
             </Layout>

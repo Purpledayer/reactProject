@@ -50,4 +50,13 @@ npm i redux react-redux redux-thunk react-router-redux   --save
 cnpm i react-router-dom --save
 cnpm i url-loader --save-dev
 cnpm i file-loader --save-dev
-cnpm install victory --save 可视化图表
+cnpm i victory --save 可视化图表
+安装fetch插件
+cnpm i whatwg-fetch --save
+同时为兼容老版本还需要安装下面插件
+cnpm i es6-promise --save
+ 使用koa模拟假数据
+ cnpm i koa koa-router --save-dev
+
+ 
+ cnpm i axios --save

@@ -7,24 +7,24 @@ import rootReducer from '../reducers'
 const nextReducer = require('../reducers')
 
 export default function configure(initialState) {
-  const create = window.devToolsExtension
-    ? window.devToolsExtension()(createStore)
-    : createStore
+	const create = window.devToolsExtension
+		? window.devToolsExtension()(createStore)
+		: createStore
 
-  const createStoreWithMiddleware = applyMiddleware(
-    reduxRouterMiddleware,
-    thunkMiddleware,
-    logger,
-    router
-  )(create)
+	const createStoreWithMiddleware = applyMiddleware(
+		reduxRouterMiddleware,
+		thunkMiddleware,
+		logger,
+		router
+	)(create)
 
-  const store = createStoreWithMiddleware(rootReducer, initialState)
+	const store = createStoreWithMiddleware(rootReducer, initialState)
 
-  if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      store.replaceReducer(nextReducer)
-    })
-  }
+	if (module.hot) {
+		module.hot.accept('../reducers', () => {
+			store.replaceReducer(nextReducer)
+		})
+	}
 
-  return store
+	return store
 }

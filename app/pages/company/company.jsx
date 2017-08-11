@@ -6,27 +6,36 @@
  */
 
 import React, { Component } from 'react';
-import { Table, Icon ,Pagination ,Input, Button ,Tooltip, Modal ,Spin} from 'antd';
-const confirm = Modal.confirm;
-function showConfirm() {
-  confirm({
-    title: '删除',
-    content: '是否确定删除？',
-    onOk() {
-      console.log('确定');
-    },
-    onCancel() {
-      console.log('取消');
-    },
-  });
-}
+import { Table, Icon ,Pagination ,Input, Button ,Tooltip, Modal ,message } from 'antd';
+import { getListData }from './../../fetch/company/company';
+import FooterOperating from './operating'
 export default class Company extends Component {
-     state = {
-        filterDropdownVisible: false,
-        data,
-        searchText: '',
-        filtered: false,
-    };
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            data: [],
+            pagination:{},
+            hasMore: false,
+            isLoadingMore: false,
+            page: 0,
+            selectedRowKeys: [],   
+    	    loading: false,
+        }
+    }
+    start = () => {
+	    this.setState({ loading: true });
+	    // ajax request after empty completing
+	    setTimeout(() => {
+	      this.setState({
+	        selectedRowKeys: [],
+	        loading: false,
+	      });
+	    }, 1000);
+	}
+	onSelectChange = (selectedRowKeys) => {
+	    console.log('selectedRowKeys changed: ', selectedRowKeys);
+	    this.setState({ selectedRowKeys });
+	}   
     onInputChange = (e) => {
         this.setState({ searchText: e.target.value });
     }
@@ -54,12 +63,12 @@ export default class Company extends Component {
         }).filter(record => !!record),
         });
     }
+    
     render() {
         const columns = [
-            { title: 'asdasd', dataIndex: ' ', key: ' ', render: text => <Icon type="hourglass" />, width: 50, }, 
             {
-                title: '类型名称',
-                dataIndex: 'name',
+                title: '公司名称',
+                dataIndex: 'cmp_name',
                 key: 'name',
                 width: 150,
                 filterDropdown: (
@@ -76,7 +85,7 @@ export default class Company extends Component {
                     }, () => this.searchInput.focus());
                 },  
             }, 
-            { title: '待办事项', dataIndex: 'age', key: 'age',width: 150,
+            { title: '拼音简码', dataIndex: 'cmp_enname', key: 'cmp_enname',width: 100,
                 filterDropdown: (
                     <div className="custom-filter-dropdown">
                     <Input ref={ele => this.searchInput = ele} placeholder="Search name" value={this.state.searchText} onChange={this.onInputChange} onPressEnter={this.onSearch}/>
@@ -85,54 +94,74 @@ export default class Company extends Component {
                 ),
                 filterIcon: <Icon type="smile-o" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />,
             }, 
-            { title: '期望处理时间',dataIndex: 'address', key: 'address', width: 150,}, 
-            { title: '责任人',dataIndex: 'address1', key: 'address1', width: 150,}, 
-            { title: '发起人',dataIndex: 'address2', key: 'address2', width: 150,}, 
-            { title: '发起日期',dataIndex: 'address3', key: 'address3', width: 150,}, 
-            { title: '备注',dataIndex: 'address4', key: 'address4',width: 150,}
+            { title: '所属地域',dataIndex: 'cmp_area', key: 'cmp_area', width: 100,}, 
+            { title: '公司地址',dataIndex: 'cmp_addr', key: 'cmp_addr', width: 150,}, 
+            { title: '管理员账号',dataIndex: 'cmp_admin', key: 'cmp_admin', width: 100,}, 
+            { title: '创建时间',dataIndex: 'reg_date', key: 'reg_date', width: 150,}, 
+            { title: '更新时间',dataIndex: 'update_date', key: 'update_date', width: 150,}, 
+            { title: '备注',dataIndex: 'remark', key: 'remark',width: 150,}
         ];
+        const { loading, selectedRowKeys } = this.state;
+    	const rowSelection = {selectedRowKeys,onChange: this.onSelectChange,};
+    	const hasSelected = selectedRowKeys.length > 0;
         return (
 			<div className="page content-box">
-				<div className="title">公司管理</div>
-                <Spin>
-				    <Table columns={columns} dataSource={this.state.data} pagination={false} scroll={{ y: true }}/>		
-                </Spin>
+				<div className="title">角色管理</div>
+                <Table rowSelection={rowSelection} size="small" columns={columns} dataSource={this.state.data} pagination={false} scroll={{ y: 500,x:1400 }}/>		
 				<div className="footer">
-                    <div className="operating">
-                        <Tooltip placement="topLeft" title="添加注册" arrowPointAtCenter>
-                            <a><Icon type="plus" /></a>
-                        </Tooltip>
-                        <Tooltip placement="topLeft" title="修改注册" arrowPointAtCenter>
-                            <a><Icon type="edit" /></a>
-                        </Tooltip>
-                        <Tooltip placement="topLeft" title="删除注册" arrowPointAtCenter>
-                            <a onClick={showConfirm}><Icon type="delete" /></a>
-                        </Tooltip>
-                        <Tooltip placement="topLeft" title="刷新" arrowPointAtCenter>
-                             <a><Icon type="reload" /></a>
-                        </Tooltip>                    
-                    </div>
-					<Pagination showSizeChanger defaultCurrent={2} total={500} className="mar-spacing-right" showTotal={showTotal} />
-				</div>			
+                    <FooterOperating></FooterOperating>
+                    <Pagination showSizeChanger defaultCurrent={2} total={500} className="mar-spacing-right" showTotal={showTotal} />
+                </div>	
 			</div>
     	);
     }
+    componentDidMount(){
+        // 获取首页数据
+        const hideMsg = message.loading('正在查询...', 0);
+        const result = getListData(false,1501562410079,20,1,'reg_date','desc')
+        result.then(res => {
+            return res.json()
+        }).then(json => {
+            const data = json.root;
+            const pagination = json;
+            this.setState({
+                // 注意，这里讲最新获取的数据，拼接到原数据之后，使用 concat 函数
+                data: this.state.data.concat(data),
+                pagination:pagination,
+            })
+        }) 
+    }
 }
-
-const data = [
-  	{    key: '1',    name: 'John Brown',age: 32, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  },
-   	{    key: '2',    name: 'Jim Green', age: 42, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  }, 
-   	{    key: '3',    name: 'Joe Black', age: 32, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  },
-   	{    key: '4',    name: 'Joe Black', age: 32, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  },
-   	{    key: '5',    name: 'Joe Black', age: 32, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  },
-   	{    key: '6',    name: 'Joe Black', age: 32, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  },
-   	{    key: '7',    name: 'Joe Black', age: 32, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  },
-   	{    key: '8',    name: 'Joe Black', age: 32, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  },
-   	{    key: '9',    name: 'Joe Black', age: 32, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  },
-   	{    key: '10',    name: 'Joe Black', age: 32, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  },
-	{    key: '11',    name: 'Joe Black', age: 32, address: 'mock信息', address1: 'mock信息', address2: 'mock信息', address3: 'mock信息', address4: 'mock信息'  }
-];
-
+const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
+    getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User',     
+    }),
+}; 
 function showTotal(total) {
   return `共 ${total} 条`;
 }
+const confirm = Modal.confirm;
+function showConfirm() {
+  confirm({
+    title: '删除',
+    content: '是否确定删除？',
+    onOk() {
+      console.log('确定');
+    },
+    onCancel() {
+      console.log('取消');
+    },
+  });
+}
+
+
+
+
+
+
+
+
+
