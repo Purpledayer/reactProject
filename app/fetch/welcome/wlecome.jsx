@@ -7,7 +7,7 @@ export function getListData(city, page) {
 
 //待办事项
 export function selecthomewosdata(page, rows, sidx , sord ,user_id) {
-    const result = post('wbp/homewos/selecthomewosdata.do', {
+    const result = post('wbp1/homewos/selecthomewosdata.do', {
         page:page,
         rows:rows,
         sidx:sidx,

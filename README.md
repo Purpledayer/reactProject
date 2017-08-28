@@ -60,3 +60,6 @@ cnpm i es6-promise --save
 
  
  cnpm i axios --save
+
+ redux-actions
+ immutable

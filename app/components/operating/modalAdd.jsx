@@ -1,17 +1,13 @@
 import React,{ Component } from 'react';
-import { Button , Icon , Modal , message } from 'antd';
+import { Button , Icon } from 'antd';
 import { findIndexByKey } from './../../components/util/util';
 import FormModal from './../modal/FormModal'
-const confirm = Modal.confirm;
 export default class ModalAdd extends Component{
-	 constructor() {
+	constructor() {
 		super();
 		this.state = {
-			confirmLoading: false,
-			formModalTitle: '新增',
-			 newsFormConfigs:myconfigtable,
-			  formValues: {},
-				showFormModal: false,
+			formValues: {},
+			formModalType:'add',
 		};
 	 }
 	
@@ -31,32 +27,41 @@ export default class ModalAdd extends Component{
 	}
 	//增加数据
 	addRows = () => {
-		this.setState({showFormModal: true,formModalTitle: '新增',formModalType: 'add',});
+		this.setState({
+			formValues:{}
+		})
+		this.props.PrivateAddRows();
+	}
+	submitFormModal = () => {
+		this.props.submitFormModal(this.state.formValues);
 	}
 	componentDidMount(){
-		console.info('this.pore',this.props);
+		// console.info('this.pore',this.props);
 		//  this.setState({ selectedLen : this.props.selectedLen.length });
 	}
+	handleCancel = (e) => {
+		this.setState({formValues: {},});
+		return false;
+		this.props.onCancel();
+    }
 	render(){
-		const {formModalTitle ,newsFormConfigs ,showFormModal, confirmLoading, formValues } = this.state;
+		const {formValues} = this.state;
+		const {formModalTitle, newsFormConfigs ,showFormModal, submitFormModal,confirmLoading,onCancel} = this.props;
 		return(
 			<div>
-				<Button type="primary" onClick={this.addRows}><Icon type="plus-circle-o" />新增</Button>
+				<Button className="mar-spacing-right" type="primary" onClick={this.addRows}><Icon type="plus-circle-o" />新增</Button>
 				<FormModal 
 				formModalTitle={formModalTitle} 
 				newsFormConfigs={newsFormConfigs}
 				formValues={formValues} 
 				showFormModal={showFormModal} 
-				submitFormModal={this.props.submitFormModal} 
+				submitFormModal={this.submitFormModal} 
 				cancelFormModal={this.cancelFormModal} 
 				confirmLoading={confirmLoading} 
-				onChange={this.formOnChange} />	
+				onChange={this.formOnChange} 
+				onCancel={this.handleCancel}/>	
 			</div>			
 		)
 	}
 }
-
-const myconfigtable = [
-    {tableKey: 'user_code',name: '字典编码',type: 'text',width: 80,validators: ['required',],},
-    {tableKey: 'user_name',name: '字典名称',type: 'text',width: 50,},
-]
+ 

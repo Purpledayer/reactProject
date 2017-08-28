@@ -3,7 +3,9 @@ import { post } from './../post';
 //公司注table列表接口
 export function getListData(_search, nd ,rows ,page ,sidx,sord) {
     // const parameter
-    const result = get('/wbp/bmcompany/querycmp.do?_search='+_search+'&nd='+nd+'&rows='+rows+'&page='+page+'&sidx='+sidx+'& sord='+sord)
+    const parameter = '_search='+_search+'&nd='+nd+'&rows='+rows+'&page='+page+'&sidx='+sidx+'& sord='+sord;
+    const url= '/wbp1/bmcompany/querycmp.do?';
+    const result = get(url,parameter);
     return result
 }
 

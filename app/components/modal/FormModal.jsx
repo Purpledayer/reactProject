@@ -1,26 +1,31 @@
-import React from 'react';
+import React ,{ Component } from 'react';
 import { Modal, Form } from 'antd';
 import Factory from './Factory';
 
 const FormItem = Form.Item;
 
-export default class FormModal extends React.Component {
+export default class FormModal extends Component {
 	constructor() {
 		super();
 		this.state = {};
 	}
 	render() {
-		const {formModalTitle,newsFormConfigs,formValues,showFormModal,submitFormModal,cancelFormModal,confirmLoading,onChange,} = this.props;
+		const {formModalTitle,showFormModal,submitFormModal,confirmLoading,newsFormConfigs,formValues,onChange} = this.props;
 		return (
-		<Modal title={formModalTitle} visible={showFormModal} onOk={submitFormModal} onCancel={cancelFormModal} confirmLoading={confirmLoading}>
-			<Form horizontal>
-				{newsFormConfigs.map(items => (
-					<FormItem key={items.tableKey} label={items.name} labelCol={{ span: 7 }} wrapperCol={{ span: 14 }} style={{width: '50%', display: 'inline-block'}}>
-						<Factory type={items.type} target={formValues} keyName={items.tableKey} onChange={onChange.inputOnChange} />
-					</FormItem>
-				))}
-			</Form>
-		</Modal>
+			<Modal 
+			title={formModalTitle} 
+			visible={showFormModal} 
+			onOk={submitFormModal} 
+			onCancel={this.props.onCancel}
+			confirmLoading={confirmLoading}>
+				<Form horizontal>
+					{newsFormConfigs.map(items => (
+						<FormItem key={items.tableKey} label={items.name} labelCol={{ span: 7 }} wrapperCol={{ span: 14 }} style={{width: '50%', display: 'inline-block'}}>
+							<Factory type={items.type} target={formValues} keyName={items.tableKey} onChange={onChange.inputOnChange} />
+						</FormItem>
+					))}
+				</Form>
+			</Modal>
 		);
 	}
 }

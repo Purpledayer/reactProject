@@ -1,34 +1,27 @@
 import React, { Component } from 'react';
-import { Table, Button, Icon,Pagination, notification, message ,Tooltip ,Modal} from 'antd';
-import FormModal from './../../components/modal/FormModal';
+import { message ,Tabs } from 'antd';
+/**组件引用 */
 import { findIndexByKey } from './../../components/util/util';
-import getSqlData from './mockdate/sqlData';
-
-import sqlData from './sqlConfig';
-//button的额外属性
-const ButtonGroup = Button.Group;
-const confirm = Modal.confirm;
+import PrivateTree from './tree/tree';
+import LeftTabsNav from './../../components/leftTabsNav/index';
+import TableList from './../../components/tableList/tabList';
+import Operating from './operating';
+/**mock数据引用 */
+import getSqlData from './../../mock/role/mockdate/sqlData';
+import sqlData from './../../mock/role/sqlConfig';
+/**button的额外属性*/
+const TabPane = Tabs.TabPane;
 export default class Role extends Component{
     constructor() {
 		super();
 		this.state = {
 			lists: [],
 			// 默认 table 头为空
-			columns: [{
-				title: '',
-				key: 'initial',
-			}],
+			columns: [{title: '',key: 'initial',}],
 			loading: false,
-			showFormModal: false,
-            confirmLoading: false,
-            formModalTitle: '新增',
-			formModalType: 'add', // add, edit, editMul
             formConfigs: [],
             newsFormConfigs:myconfigtable,
-            formValues: {},
-            datalength:0,//总条数
             selectedRowKeys: [],
-			addNum: 0,
 		};
 	}
 	componentDidMount() {
@@ -38,89 +31,10 @@ export default class Role extends Component{
 		if (this.props.tableName === tableName) return;
 		this.renderLists(tableName);
 	}
-	
-	
-  // 处理 <FormModal /> 中不同类型的表单事件
-	formOnChange = {
-		inputOnChange: (event, key) => {
-		const formValues = { ...this.state.formValues };
-		formValues[key] = event.target.value.trim();
-		this.setState({ formValues });
-		},
-	}
-	//增加数据
-	addRows = () => {
-		this.setState({showFormModal: true,formModalTitle: '新增',formModalType: 'add',});
-    }
-    //删除
-    delConfirm = () => {
-        const selectedRowKeys = this.state.selectedRowKeys;
-        confirm({
-        title: '确定删除这些数据吗',
-        content: `被选中行的ID：【${selectedRowKeys.join(', ')}】`,
-        onOk: () => {
-            this.setState({ loading: true });
-            const hideMsg = message.loading('删除中...', 0);
-
-            const lists = [...this.state.lists];
-            // 根据已选择的 key 筛选 lists 中的索引并删除
-            selectedRowKeys.forEach((val) => {
-            lists.splice(findIndexByKey('key', val, lists), 1);
-            });
-
-            // 模拟 ajax
-            setTimeout(() => {
-            this.setState({
-                loading: false,
-                lists,
-                selectedRowKeys: [],
-            }, () => {
-                hideMsg();
-                notification.success({
-                message: '成功',
-                description: '删除数据成功',
-                });
-            });
-            }, 1000);
-        },
-        });
-    }
-	submitFormModal = () => {
-		this.setState({ confirmLoading: true });
-		const hideMsg = message.loading('提交中...', 0);
-		const formValues = { ...this.state.formValues };
-		const lists = [...this.state.lists];
-        const type = this.state.formModalType;
-        const selectedRowKeys = [...this.state.selectedRowKeys];
-		let addNum = this.state.addNum;
-        addNum = this.state.addNum + 1;
-        formValues.id = formValues.id || (lists[lists.length - 1].id + addNum);
-        formValues.key = formValues.id;
-        lists.unshift(formValues);
-       
-		// 模拟 ajax 添加
-		setTimeout(() => {
-			this.setState({lists,addNum,formValues: {},confirmLoading: false,showFormModal: false,}, () => {
-				hideMsg();
-				notification.success({
-				message: '成功',
-				description: `${type === 'add' ? '新增' : '修改'}数据完成`,
-				});
-			});
-		}, 1000);
-	}
-
-	cancelFormModal = () => {
-		this.setState({
-		showFormModal: false,
-		formValues: {},
-		});
-	}
 	// 获取表数据
 	getLists = tableName => (
 		getSqlData[`getTable${tableName}`]().then(data => (
 			Promise.resolve(data.map((item) => {
-                this.setState({ datalength:data.length });
 				item.key = item.id;
 			return item;
             }))
@@ -160,22 +74,42 @@ export default class Role extends Component{
 	}
     onSelectChange = (selectedRowKeys) => {
         this.setState({ selectedRowKeys });
-    }
+	}
+	
+	/***更新数据*/
+	UpdateData =(data)=>{
+		this.setState({
+			lists:data
+		})
+	}
     render(){
-        const { selectedRowKeys,formModalTitle ,columns,lists,loading,showFormModal,confirmLoading,newsFormConfigs,formValues,datalength} = this.state;
-        const selectedLen = selectedRowKeys.length;
+        const { lists, columns, loading, newsFormConfigs , selectedRowKeys } = this.state;
+		const selectedLen = selectedRowKeys.length;
         const rowSelection = {selectedRowKeys,onChange: this.onSelectChange,};
         return(
-            <div className="page content-box">
-				<div className="title">用户管理</div>
-                <div style={{ margin: '10px 0' ,position:'fixed',bottom:'2rem' , left:'13.5rem' , zIndex: '1'}}>
-					<ButtonGroup size="small">
-						<Button type="primary" onClick={this.addRows}><Icon type="plus-circle-o" />新增</Button>
-                        <Button type="primary" disabled={selectedLen < 1} onClick={this.delConfirm}><Icon type="delete" />{selectedLen > 1 ? '批量删除' : '删除'}</Button>
-					</ButtonGroup>
+            <div className="page content-box displayFlex Role" >
+				<LeftTabsNav ></LeftTabsNav>
+				<div style={{width:'100%'}}>
+					<Tabs onChange={callback} type="card">
+						<TabPane tab="功能权限" key="1">
+							<PrivateTree></PrivateTree>
+						</TabPane>
+						<TabPane tab="角色用户" key="2">
+							<div className="title">用户管理</div>
+							<TableList 
+							rowSelection={rowSelection} 
+							columns={columns} 
+							dataSource={lists} 
+							pagination={true} 
+							loading={loading}/>
+							<Operating 
+							UpdateData={this.UpdateData.bind(this)} 
+							myconfigtable={newsFormConfigs} 
+							selectedRowKeys={selectedRowKeys} 
+							lists={this.state.lists}/>
+						</TabPane>
+					</Tabs>
 				</div>
-				<Table className="standard-table" scroll={{ y: "27.5rem",}} rowSelection={rowSelection} columns={columns} dataSource={lists} pagination={true} loading={loading}  pagination={{showQuickJumper: true, showSizeChanger: true, pageSizeOptions: ['10', '20', '40', '50'],showTotal(total) { return `共 ${total} 条`; },}} />
-                <FormModal formModalTitle={formModalTitle} newsFormConfigs={newsFormConfigs} formValues={formValues} showFormModal={showFormModal} submitFormModal={this.submitFormModal} cancelFormModal={this.cancelFormModal} confirmLoading={confirmLoading} onChange={this.formOnChange} />	
 			</div>
         )
     }
@@ -184,6 +118,10 @@ export default class Role extends Component{
 Role.propTypes = {
   tableName: React.PropTypes.string,
 };
+
+function callback(key) {
+  console.log(key);
+}
 
 const myconfigtable = [
     {tableKey: 'user_code',name: '用户名',type: 'text',width: 80,validators: ['required',],},

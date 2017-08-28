@@ -85,8 +85,8 @@ const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 		proxy: {
 			// 凡是 `/wbp` 开头的 http 请求，都会被代理到 localhost:3000 上，由 koa 提供 mock 数据。
 			// koa 代码在 ./mock 目录中，启动命令为 npm run mock
-			'/wbp': {
-				target: 'http://localhost:3001/',
+			'/wbp1': {
+				target: 'http://localhost:8080/',
 				secure: false
 			}
 		},

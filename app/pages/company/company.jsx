@@ -8,7 +8,9 @@
 import React, { Component } from 'react';
 import { Table, Icon ,Pagination ,Input, Button ,Tooltip, Modal ,message } from 'antd';
 import { getListData }from './../../fetch/company/company';
-import FooterOperating from './operating'
+
+import TableList from './../../components/tableList/tabList';
+import Operating from './operating'
 export default class Company extends Component {
     constructor(props, context) {
         super(props, context);
@@ -19,7 +21,8 @@ export default class Company extends Component {
             isLoadingMore: false,
             page: 0,
             selectedRowKeys: [],   
-    	    loading: false,
+            loading: false,
+            newsFormConfigs:myconfigtable,
         }
     }
     start = () => {
@@ -63,7 +66,12 @@ export default class Company extends Component {
         }).filter(record => !!record),
         });
     }
-    
+    /***更新数据*/
+	UpdateData =(data)=>{
+		this.setState({
+			lists:data
+		})
+	}
     render() {
         const columns = [
             {
@@ -101,67 +109,47 @@ export default class Company extends Component {
             { title: '更新时间',dataIndex: 'update_date', key: 'update_date', width: 150,}, 
             { title: '备注',dataIndex: 'remark', key: 'remark',width: 150,}
         ];
-        const { loading, selectedRowKeys } = this.state;
-    	const rowSelection = {selectedRowKeys,onChange: this.onSelectChange,};
-    	const hasSelected = selectedRowKeys.length > 0;
+        const { selectedRowKeys,formModalTitle ,lists,loading,showFormModal,confirmLoading,newsFormConfigs,formValues,datalength} = this.state;
+        const hasSelected = selectedRowKeys.length > 0;
+        const selectedLen = selectedRowKeys.length;
+		const rowSelection = {selectedRowKeys,onChange: this.onSelectChange,};
         return (
 			<div className="page content-box">
 				<div className="title">角色管理</div>
-                <Table rowSelection={rowSelection} size="small" columns={columns} dataSource={this.state.data} pagination={false} scroll={{ y: 500,x:1400 }}/>		
-				<div className="footer">
-                    <FooterOperating></FooterOperating>
-                    <Pagination showSizeChanger defaultCurrent={2} total={500} className="mar-spacing-right" showTotal={showTotal} />
-                </div>	
+                <TableList rowSelection={rowSelection} size="small" columns={columns} dataSource={this.state.data} pagination={false} scroll={{ y: 500,x:1400 }}/>		
+                <Operating  UpdateData={this.UpdateData.bind(this)} myconfigtable={this.state.newsFormConfigs} selectedRowKeys={selectedRowKeys} lists={this.state.data}></Operating>
 			</div>
     	);
     }
     componentDidMount(){
         // 获取首页数据
         const hideMsg = message.loading('正在查询...', 0);
-        const result = getListData(false,1501562410079,20,1,'reg_date','desc')
+        const result = getListData(false,1501562410079,20,1,'reg_date','desc');
         result.then(res => {
             return res.json()
         }).then(json => {
             const data = json.root;
             const pagination = json;
             this.setState({
-                // 注意，这里讲最新获取的数据，拼接到原数据之后，使用 concat 函数
+                //这里讲最新获取的数据 
                 data: this.state.data.concat(data),
                 pagination:pagination,
-            })
+            }, hideMsg)
         }) 
     }
-}
-const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-    },
-    getCheckboxProps: record => ({
-        disabled: record.name === 'Disabled User',     
-    }),
-}; 
-function showTotal(total) {
-  return `共 ${total} 条`;
-}
-const confirm = Modal.confirm;
-function showConfirm() {
-  confirm({
-    title: '删除',
-    content: '是否确定删除？',
-    onOk() {
-      console.log('确定');
-    },
-    onCancel() {
-      console.log('取消');
-    },
-  });
-}
+} 
+ 
 
-
-
-
-
-
+const myconfigtable = [
+    {title: '公司名称',dataIndex: 'cmp_name',key: 'name',width: 150,    }, 
+    { title: '拼音简码', dataIndex: 'cmp_enname', key: 'cmp_enname',width: 100,}, 
+    { title: '所属地域',dataIndex: 'cmp_area', key: 'cmp_area', width: 100,}, 
+    { title: '公司地址',dataIndex: 'cmp_addr', key: 'cmp_addr', width: 150,}, 
+    { title: '管理员账号',dataIndex: 'cmp_admin', key: 'cmp_admin', width: 100,}, 
+    { title: '创建时间',dataIndex: 'reg_date', key: 'reg_date', width: 150,}, 
+    { title: '更新时间',dataIndex: 'update_date', key: 'update_date', width: 150,}, 
+    { title: '备注',dataIndex: 'remark', key: 'remark',width: 150,}
+];
 
 
 

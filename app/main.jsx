@@ -10,6 +10,7 @@ import myhistory from './history'
 // 测试 fetch 的功能
 // import {getuser } from './fetch/test'
 // getuser();
+import './config/config'
 const store = configure({ config: global.$GLOBALCONFIG })
 const history = syncHistoryWithStore(myhistory, store)
 history.listen(function (location) { return location })

@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { Table, Button, Icon,Pagination, notification, message ,Tooltip ,Modal} from 'antd';
 import FormModal from './../../components/modal/FormModal';
 import { findIndexByKey } from './../../components/util/util';
-import Operating from './../../components/operating/operating'
-import ModalDel from './../../components/operating/modalDel';
-import ModalAdd from './../../components/operating/modalAdd';
-import ModalEdit from './../../components/operating/modalEdit';
+ 
 import getSqlData from './mockdate/sqlData';
 import sqlData from './sqlConfig';
+
+import Operating from './operating'
 //button的额外属性
 const ButtonGroup = Button.Group;
 const confirm = Modal.confirm;
@@ -127,12 +126,9 @@ export default class Dictsrc extends Component{
 		const rowSelection = {selectedRowKeys,onChange: this.onSelectChange,};
         return(
             <div className="page content-box">
-				<div className="title">用户管理</div>
-				<ModalAdd submitFormModal={this.submitFormModal}></ModalAdd>
-				<ModalEdit selectedRowKeys ={this.state.selectedRowKeys} lists={this.state.lists} submitFormModal={this.submitFormModal}></ModalEdit>
-                <ModalDel selectedRowKeys ={this.state.selectedRowKeys} DelDataSubmit={this.DelDataSubmit}></ModalDel>
-				{/* <Operating selectedRowKeys ={this.state.selectedRowKeys}></Operating>  */}
-				<Table className="standard-table" scroll={{ y: "27.5rem",}} rowSelection={rowSelection} columns={columns} dataSource={lists} pagination={true} loading={loading}  pagination={{showQuickJumper: true, showSizeChanger: true, pageSizeOptions: ['10', '20', '40', '50'],showTotal(total) { return `共 ${total} 条`; },}} />
+				<div className="title">代码生成</div>
+				<Table className="standard-table" scroll={{ y: "27.5rem",}} rowSelection={rowSelection} columns={columns} dataSource={lists} pagination={false} loading={loading}/>
+				<Operating myconfigtable={columns} selectedRowKeys={selectedRowKeys} lists={this.state.lists} />
 			</div>
         )
     }

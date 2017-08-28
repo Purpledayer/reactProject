@@ -29,7 +29,6 @@ class NormalLoginForm extends Component {
 			// 	// this.setState({
 			// 	// })
 			// }) 
-			console.info('Received values of form: ', values);
 			sessionStorage.setItem('token', 'token')
 			/*react-router v4.0.x 新的链接方式 */
 			this.props.history.push('/')
