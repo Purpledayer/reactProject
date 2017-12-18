@@ -2,9 +2,9 @@
 ### 上线依赖插件说明
 ```bash
 react                                   //react.js  
+react-dom                               //react.js dom操作
 react-router                            //react.js路由  
-react-dom                               //react.js dom操作  
-antd                                    //蚂蚁金服ant design 插件  
+react-router-dom                        //react-router4.0新版
 webpack                                 //webpack插件  
 html-webpack-plugin                     //用来简化创建服务于 webpack bundle 的 HTML 文件  
 open-browser-webpack-plugin             //启动后自动打开浏览器插件  
@@ -43,4 +43,7 @@ babel-plugin-transform-decorators-legacy
 babel-plugin-webpack-alias  
 babel-preset-es2015  
 babel-preset-stage-0  
-babel-preset-react
+babel-preset-react  
+## 功能描述  
+webpack基本功能配置  
+react.js 基础功能实现 form表单实现
