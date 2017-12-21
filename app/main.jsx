@@ -1,22 +1,5 @@
-import 'babel-polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router';
-import { Provider } from 'react-redux';
-import { syncHistoryWithStore } from 'react-router-redux'
-import router from './router';
-import configure from './store/configureStore';
-import myhistory from './history'
+import Crouter from './router';
 
-const store = configure({ config: global.$GLOBALCONFIG })
-const history = syncHistoryWithStore(myhistory, store)
-history.listen(function (location) { return location })
-
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history} >
-        { router }
-    </Router>
-  </Provider>,
-  document.getElementById('root')
-);
+ReactDOM.render(<Crouter /> ,document.getElementById('root'));

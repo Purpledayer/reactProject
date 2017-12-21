@@ -1,27 +1,37 @@
-import React from 'react'
-import { Route,  IndexRoute} from 'react-router'
-import Containers from './containers';
+import React, { Component } from 'react';
+import {  BrowserRouter as Router,  Route,  Link,  Redirect,  Switch} from 'react-router-dom'
+
+import Containers from './pages/index';
 import Login from './pages/login/login';
 import Welcome from './pages/welcome';
 import Company from './pages/company/company';
 import Test from './pages/test/index'; 
-/* 进入路由的判断*/
-function isLogin(nextState, replaceState) {
-  const token = sessionStorage.getItem('token')
-  console.info('token',token);
-  if (!token) {
-    replaceState('/login')
-  }
+ 
+export default class Crouter extends Component {
+	constructor(){
+		super();
+		// const token = sessionStorage.getItem('token')
+		// if (!token) {
+		// 	replaceState('/login')
+		// }
+	}
+	render(){
+		return(
+			<Router>
+				<div>
+          			<Switch>
+						{/* <Route exact path="/" component={Containers} /> */}
+						<Route  path="/Login" component={Login} />
+						<Containers>
+							<Switch> 
+								<Route path="/home" component={Company}/>
+								<Route path="/test" component={Test}/>
+								<Redirect from="/" to="/home"/>
+							</Switch>
+						</Containers>
+					</Switch>
+        		</div>
+			</Router>
+		)
+	}
 }
-const router = (
-  <Route>
-     <Route path="/" component={Containers} onEnter={isLogin}> 
-      <IndexRoute component={Welcome} />
-      <Route path="/company" component={Company} />
-      <Route path="/test" component={Test} />
-    </Route>
-     <Route path="/login" component={Login}></Route>
-  </Route>
-);
-
-export default router
